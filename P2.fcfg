@@ -1,0 +1,124 @@
+# Grammer Productions
+S[del=nil] -> NP[num=?n] VP[agrm=[num=?n, -AUX], subcat=nil, del=nil]
+S[del=nil] -> NP[num=?n] Aux[num=?n, tense=?t] Neg VP[agrm=[tense=?t, num=pl], subcat=nil, del=nil]
+S[del=nil] -> SInv[del=nil]
+S[del=nil] -> SbordP S[del=nil]
+S[del=nil] -> S[del=nil] SbordP
+S -> Wh[del=?d] SInv[del=?d]
+
+SInv[del=?d] -> Aux[num=?n] NP[num=?n] VP[agrm=[+INF, -AUX], subcat=nil, del=?d]
+SBar[del=?d] -> NP[num=?n] VP[agrm=[num=?n, -AUX], subcat=nil, del=?d]
+
+# Subordinating Conjunctions 
+SbordP -> Conj[cat=cplx] S[-INV]
+
+
+NP[num=?n] -> Det[num=?n] Nominal[num=?n]
+NP[num=?n] -> Nominal[num=pl] | Nominal[mass=unc]
+NP[num=?n] -> ProperNoun[num=?n]
+NP[num=pl] -> NP Conj[cat=cmpd] NP
+Nominal[num=?n] -> N[num=?n]
+Nominal[num=?n] -> Adj Nominal[num=?n]
+Nominal[num=?n] -> N Nominal[num=?n]
+Nominal[num=?n] -> Nominal[num=?n] PP
+
+
+VP[agrm=?a, subcat=?rest, del=?d] -> VP[agrm=?a, subcat=[head=?arg, tail=?rest], del=?d] ARG[cat=?arg]
+VP[agrm=?a, subcat=?rest, del=?d] -> VP[agrm=?a, subcat=[head=?d, tail=?rest]]
+VP[agrm=?a, subcat=?rest, del=?d] -> VP[agrm=?a, subcat=[head=S, tail=?rest]] ARG[cat=S, del=?d]
+
+#modal < perfect < progressive < passive
+VP[agrm=[num=?n], subcat=?args, del=?d] -> Aux[num=?n, INF=?i, tense=?t] VP[agrm=[INF=?i, tense=?t], subcat=?args, del=?d]
+VP[agrm=?a, subcat=?args, del=?d] -> VP[agrm=?a, subcat=?args, del=?d] PP
+VP[agrm=?a, subcat=?args, del=?d] -> Adv VP[agrm=?a, subcat=?args, del=?d]
+VP[agrm=?a, subcat=?args] -> V[agrm=?a, subcat=?args]
+
+ARG[cat=NP] -> NP
+ARG[cat=PP] -> PP
+ARG[cat=S, del=nil] -> S
+ARG[cat=S, del=?d] -> SBar[del=?d]
+ARG[cat=Ving] -> VP[agrm=[form=grd]]
+
+PP -> Prep NP
+
+# Lexical Productions
+V[subcat=[head=NP, tail=nil], agrm=?a] -> VNP[agrm=?a]
+V[subcat=[head=NP, tail=[head=NP, tail=nil]], agrm=?a] -> VNPNP[agrm=?a]
+V[subcat=[head=NP, tail=[head=Ving, tail=nil]], agrm=?a] -> VNPGND[agrm=?a]
+V[subcat=[head=PP, tail=nil], agrm=?a] -> VPP[agrm=?a]
+V[subcat=[head=Ving, tail=nil], agrm=?a] -> VVing[agrm=?a]
+V[subcat=[head=S, tail=nil], agrm=?a] -> VS[agrm=?a]
+V[subcat=nil, agrm=?a] -> IntV[agrm=?a]
+
+
+VNP[agrm=[num=pl, tense=pres, +INF]] -> 'carry'
+VNP[agrm=[num=sg, tense=pres, -INF]] -> 'carries'
+VNP[agrm=[tense=past, -INF]] -> 'carried'
+VNP[agrm=[form=grd, +AUX]] -> 'carrying'
+
+IntV[agrm=[num=pl, tense=pres, +INF]] -> 'sneeze'
+IntV[agrm=[num=sg, tense=pres, -INF]] -> 'sneezes'
+IntV[agrm=[tense=past, -INF]] -> 'sneezed'
+
+VNP[agrm=[num=sg, tense=pres, -INF]] -> 'wears'
+VNP[agrm=[num=pl, tense=pres, +INF]] -> 'wear'
+VNP[agrm=[tense=past, -INF]] -> 'wore'
+VNP[agrm=[tense=perf, -INF, +AUX]] -> 'worn'
+
+VNPGND[agrm=[tense=perf, -INF, +AUX]] -> 'seen'
+
+VNPNP[agrm=[tense=past, -INF]] -> 'gave'
+VNPNP[agrm=[tense=pres, +INF]] -> 'give'
+IntV[agrm=[num=sg, tense=pres, -INF]] -> 'walks'
+VPP[agrm=[num=sg, tense=pres, -INF]] -> 'walks'
+
+VS[agrm=[num=sg, tense=pres, -INF]] -> 'thinks'
+VS[agrm=[num=pl, tense=pres, +INF]] -> 'think'
+IntV[agrm=[num=pl, tense=pres, +INF]] -> 'walk'
+VPP[agrm=[num=pl, tense=pres, +INF]] -> 'walk'
+VPP[agrm=[num=sg, tense=pres, -INF]] -> 'rolls'
+
+VPP[agrm=[form=grd, +AUX]] -> 'walking'
+VVing[agrm=[num=sg, tense=pres, -INF]] -> 'likes'
+VVing[agrm=[num=pl, tense=pres, +INF]] -> 'like'
+
+Det[num=sg] -> 'a'
+# quantifiers
+Det[num=pl] -> 'all'
+Det -> 'the'
+
+Prep -> 'in'
+Prep -> 'up'
+Prep -> 'down'
+Prep -> 'with'
+
+Adj -> 'grey'
+Adj -> 'large'
+Adj -> 'heavy'
+
+Conj[cat=cmpd] -> 'and'
+#for subordinate clause
+Conj[cat=cplx] -> 'when'
+
+N[num=sg, mass=cnt] -> 'suit'
+N[num=sg, mass=cnt] -> 'house'
+N[num=sg, mass=cnt] -> 'piano'
+N[num=pl, mass=cnt] -> 'wheels'
+N[num=pl, mass=cnt] -> 'stairs'
+
+Adv -> 'always'
+#for question sentence
+Wh -> 'when'
+Wh[del=NP] -> 'what' | 'whom'
+
+Aux[num=sg, tense=pres, +INF] -> 'does'
+Aux[num=pl, tense=pres, +INF]  -> 'do'
+Aux[+INF]  -> 'may'
+Aux[tense=perf, num=sg]  -> 'has'
+Aux[tense=perf, num=pl]  -> 'have'
+
+Neg -> 'not'
+
+ProperNoun[num=sg]  -> 'Stan'
+ProperNoun[num=sg] -> 'Ollie'
+

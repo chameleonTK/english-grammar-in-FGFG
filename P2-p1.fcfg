@@ -1,0 +1,24 @@
+S -> NP VP
+S -> Aux NP VP
+S -> Wh VP
+S -> Wh Aux NP VP
+NP -> Det Norminal
+NP -> ProperNoun
+Norminal -> N
+Norminal -> N Norminal
+
+
+VP -> VP ARG
+VP -> V
+ARG -> NP
+ARG -> NP PP
+ARG -> PP
+PP -> Prep NP
+
+V -> 'carry'
+V -> 'carries'
+V -> 'carried'
+ProperNoun -> 'Stan'
+ProperNoun -> 'Ollie'
+
+
