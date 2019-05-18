@@ -14,7 +14,8 @@ SbordP -> Conj[cat=cplx] S[-INV]
 
 
 NP[num=?n] -> Det[num=?n] Nominal[num=?n]
-NP[num=?n] -> Nominal[num=pl] | Nominal[mass=unc]
+NP[num=pl] -> Nominal[num=pl]
+NP[num=sg, mass=unc] -> Nominal[mass=unc]
 NP[num=?n] -> ProperNoun[num=?n]
 NP[num=pl] -> NP Conj[cat=cmpd] NP
 Nominal[num=?n] -> N[num=?n]
